@@ -1,0 +1,1701 @@
+﻿# Meeting
+30 Min Meeting between Ellis Crosby and Michael Taylor
+Michael Taylor,Ellis Crosby
+
+## Transcript
+WEBVTT
+
+
+1
+00:01.080 --> 00:03.838
+<v Ellis Crosby>At least showing you how the auth works.
+
+
+2
+00:04.014 --> 00:13.130
+<v Ellis Crosby>So the key, I mean yeah, the main structure is it's fast API basically as you said, fast API serving
+
+
+3
+00:13.590 --> 00:22.462
+<v Ellis Crosby>HTMX and I think Alpine J's or to, honestly the J's kind of diverges between alpine.
+
+
+4
+00:22.526 --> 00:26.870
+<v Michael Taylor>Yeah, yeah. I found that. I've been using Alpine for some things and then HTMX for others.
+
+
+5
+00:26.910 --> 00:32.066
+<v Ellis Crosby>Yeah, yeah. And like as long as the AI knows what's going on I just let it slide.
+
+
+6
+00:32.138 --> 00:33.234
+<v Michael Taylor>Yeah. Just yellow.
+
+
+7
+00:33.282 --> 00:37.402
+<v Ellis Crosby>Yeah. So I have all my templates in here.
+
+
+8
+00:37.426 --> 00:44.842
+<v Ellis Crosby>I have my roots in this one and the top level I have this auth and this database, actually know
+
+
+9
+00:44.866 --> 00:48.830
+<v Ellis Crosby>the database which at the moment I have auth main and models.
+
+
+10
+00:50.090 --> 00:56.814
+<v Ellis Crosby>This is, this is the part I just usually drop into any of the pocket based projects.
+
+
+11
+00:56.942 --> 01:04.130
+<v Ellis Crosby>It looks a bit gnarly but yeah, you don't need to worry about too much. It's very reusable.
+
+
+12
+01:06.270 --> 01:08.050
+<v Ellis Crosby>So basically in here there's
+
+
+13
+01:11.150 --> 01:19.370
+<v Ellis Crosby>register user loginuser register users which is a case of adding a.
+
+
+14
+01:21.100 --> 01:24.876
+<v Michael Taylor>Yeah, this is a bit weird. This is what it recommended.
+
+
+15
+01:24.948 --> 01:27.548
+<v Michael Taylor>And I was like wait, why are we not hashing the password?
+
+
+16
+01:27.684 --> 01:30.220
+<v Michael Taylor>And apparently it does hash it on the other side.
+
+
+17
+01:30.260 --> 01:36.000
+<v Ellis Crosby>Right, exactly. Yeah. Similar with, you can set up like Oauth.
+
+
+18
+01:36.420 --> 01:42.440
+<v Ellis Crosby>I haven't really used it too much in the past but you can also do oauth which is a different
+
+
+19
+01:43.340 --> 01:49.420
+<v Ellis Crosby>function. And then with logging in it's a similar kind of thing that you get this,
+
+
+20
+01:54.480 --> 01:59.816
+<v Ellis Crosby>you have this like token, you get the user and then you have like a token that you can drop
+
+
+21
+01:59.848 --> 02:02.700
+<v Ellis Crosby>into the cookies to.
+
+
+22
+02:03.400 --> 02:11.740
+<v Michael Taylor>And it uses like server based, like cookies basically. That's the best on the request. That's the best.
+
+
+23
+02:16.850 --> 02:18.670
+<v Ellis Crosby>I don't think it's the best. It's good enough.
+
+
+24
+02:19.290 --> 02:22.030
+<v Michael Taylor>Yeah. What I mean is it works. It's fine.
+
+
+25
+02:22.410 --> 02:27.870
+<v Ellis Crosby>Yeah, it works. So I haven't found any reason to change it.
+
+
+26
+02:29.130 --> 02:38.802
+<v Ellis Crosby>And then I also have to sort of like make sure that all of the different functions or use it.
+
+
+27
+02:38.826 --> 02:41.390
+<v Ellis Crosby>I dropped that into, well I have like the,
+
+
+28
+02:45.090 --> 02:49.898
+<v Ellis Crosby>the pocket base client as sort of part of the app just like it.
+
+
+29
+02:49.954 --> 02:51.426
+<v Michael Taylor>Oh cool, okay. Yeah.
+
+
+30
+02:51.458 --> 02:53.202
+<v Ellis Crosby>Interesting. Yeah.
+
+
+31
+02:53.386 --> 02:56.630
+<v Michael Taylor>So that we've, you don't need to like import it I guess.
+
+
+32
+02:58.050 --> 03:04.453
+<v Ellis Crosby>Exactly. It just for the. Um, for registering, I just re initialize it here.
+
+
+33
+03:04.533 --> 03:09.837
+<v Ellis Crosby>Um, doesn't really make too much of a difference, but with the like, as the user's moving to the app,
+
+
+34
+03:09.965 --> 03:16.789
+<v Ellis Crosby>you just basically like um, have the request going into every function and then from that request you can grab
+
+
+35
+03:16.821 --> 03:20.693
+<v Ellis Crosby>the app and then grab the database through there.
+
+
+36
+03:20.773 --> 03:27.213
+<v Ellis Crosby>And then you just sort of assist it a little bit more. Makes it a bit easier to, to handle.
+
+
+37
+03:27.333 --> 03:29.713
+<v Ellis Crosby>Otherwise you end up with getting locked out.
+
+
+38
+03:31.133 --> 03:35.493
+<v Michael Taylor>Yeah, because I'm running into a bug at the minute with mine, but yeah.
+
+
+39
+03:35.533 --> 03:37.673
+<v Michael Taylor>I wonder if it's maybe because I didn't do this.
+
+
+40
+03:39.253 --> 03:47.033
+<v Ellis Crosby>Yeah, I mean this, I also had something, I only put this in fairly recently and before that there was
+
+
+41
+03:47.493 --> 03:51.713
+<v Ellis Crosby>a few cases where the user just get logged out or I just couldn't find the user.
+
+
+42
+03:52.943 --> 03:56.535
+<v Ellis Crosby>Yeah, I don't know, it just. Cool.
+
+
+43
+03:56.719 --> 04:06.543
+<v Ellis Crosby>But yeah, this key part and then this getuser function of most of the routes.
+
+
+44
+04:06.583 --> 04:12.983
+<v Ellis Crosby>So just checking which users, checking if a user is logged in and then if they are grabbing all associated
+
+
+45
+04:13.023 --> 04:20.755
+<v Ellis Crosby>things with that user. Bear with me. I just realized I have this. If you have the same thing.
+
+
+46
+04:20.779 --> 04:27.023
+<v Ellis Crosby>I have this weird thing whenever I have a fast API.
+
+
+47
+04:28.563 --> 04:35.811
+<v Ellis Crosby>If I shut down the app, the address stays sort of reserved for a little bit and I have to
+
+
+48
+04:35.827 --> 04:37.627
+<v Ellis Crosby>use this little thing to.
+
+
+49
+04:37.715 --> 04:40.223
+<v Michael Taylor>Oh really? Yeah, no, no, I haven't had that issue.
+
+
+50
+04:41.003 --> 04:49.203
+<v Ellis Crosby>Yeah, it's happened recently on my laptop. The plot gets sort of held after like close them.
+
+
+51
+04:50.023 --> 04:54.683
+<v Ellis Crosby>Yeah, I'll say that. Yeah. There's no, there's no real functionality in the app at the moment.
+
+
+52
+04:55.103 --> 05:03.363
+<v Ellis Crosby>This one, the idea was it would be like an AI, like database Ui for non technical people.
+
+
+53
+05:04.303 --> 05:07.683
+<v Michael Taylor>Oh nice. So you can just chat to your database basically.
+
+
+54
+05:08.223 --> 05:08.791
+<v Ellis Crosby>Yeah.
+
+
+55
+05:08.887 --> 05:13.940
+<v Ellis Crosby>Like I had a client that was annoying me about something, so I was trying to build this just so
+
+
+56
+05:13.956 --> 05:21.992
+<v Ellis Crosby>they could do things themselves. But yeah, it has at least the auth part working. So yeah,
+
+
+57
+05:28.252 --> 05:32.912
+<v Ellis Crosby>currently I don't have any of the email service set up.
+
+
+58
+05:33.932 --> 05:35.732
+<v Michael Taylor>I was wondering how that works.
+
+
+59
+05:35.812 --> 05:46.551
+<v Ellis Crosby>Yeah, I'll show you the marketplace. It's pretty easy to set them up.
+
+
+60
+05:46.607 --> 05:49.215
+<v Ellis Crosby>Like sort of similar to superbase, to be honest.
+
+
+61
+05:49.319 --> 05:50.039
+<v Michael Taylor>Yeah.
+
+
+62
+05:50.231 --> 05:54.719
+<v Michael Taylor>So when you just, you just registered a user and then you went to log in and then log that
+
+
+63
+05:54.751 --> 06:00.023
+<v Michael Taylor>user in. That was the bug I was having actually, is when I register, I tried to.
+
+
+64
+06:01.103 --> 06:04.153
+<v Michael Taylor>Authenticate the user then as well, but it doesn't seem to work.
+
+
+65
+06:07.693 --> 06:09.253
+<v Ellis Crosby>So, like, that directly.
+
+
+66
+06:09.413 --> 06:10.141
+<v Michael Taylor>Yeah, so what?
+
+
+67
+06:10.157 --> 06:16.593
+<v Michael Taylor>I mean, normally when you register for an app, it would log you straight in, if that makes sense.
+
+
+68
+06:16.893 --> 06:23.473
+<v Michael Taylor>And that was the. It didn't work with this setup.
+
+
+69
+06:25.813 --> 06:27.999
+<v Ellis Crosby>Yeah, yeah.
+
+
+70
+06:28.111 --> 06:34.203
+<v Ellis Crosby>I've actually never added that, but I wonder if it would just be a case of, like, just
+
+
+71
+06:35.623 --> 06:37.687
+<v Michael Taylor>running, like, login user afterwards or something.
+
+
+72
+06:37.735 --> 06:41.003
+<v Ellis Crosby>Yeah, yeah. I mean, I guess you already have the password they put in.
+
+
+73
+06:44.623 --> 06:48.923
+<v Ellis Crosby>Yeah, let me double check on the.
+
+
+74
+06:57.593 --> 07:03.253
+<v Ellis Crosby>I mean, to be honest. Yeah, I guess you probably could see if that would work, actually,
+
+
+75
+07:07.193 --> 07:12.753
+<v Michael Taylor>because I can imagine people getting confused if they register and then they're like, oh, wait, now I'm not, like,
+
+
+76
+07:12.833 --> 07:15.773
+<v Michael Taylor>logged in yet, or they have to log in again.
+
+
+77
+07:17.973 --> 07:18.753
+<v Ellis Crosby>Yeah.
+
+
+78
+07:22.093 --> 07:22.485
+<v Ellis Crosby>Okay.
+
+
+79
+07:22.509 --> 07:26.553
+<v Michael Taylor>I mean, yeah, don't worry about that right now, but I'll dig into it.
+
+
+80
+07:27.253 --> 07:32.633
+<v Ellis Crosby>Yeah, I guess if you can sort of potentially push that back to the login post.
+
+
+81
+07:35.093 --> 07:40.913
+<v Ellis Crosby>I don't know if this is that interesting. It looks pretty standard on the way that I'm saying the cookies.
+
+
+82
+07:42.893 --> 07:46.811
+<v Ellis Crosby>I don't know if that was anything we having any problems with as well, but I just sort of dropped
+
+
+83
+07:46.827 --> 07:48.303
+<v Ellis Crosby>the token into this PBR.
+
+
+84
+07:52.923 --> 07:56.583
+<v Michael Taylor>Yeah, I think that's how it's working on my one as well. That called it for me.
+
+
+85
+07:58.443 --> 08:05.943
+<v Ellis Crosby>Yeah, exactly. Yeah. Can't explain too much about this one, but, yes, that's.
+
+
+86
+08:06.563 --> 08:08.907
+<v Ellis Crosby>I mean, I can send you this as well. Like, this isn't.
+
+
+87
+08:09.035 --> 08:09.851
+<v Michael Taylor>Yeah, that'd be great. Yeah.
+
+
+88
+08:09.867 --> 08:10.743
+<v Ellis Crosby>If you don't mind
+
+
+89
+08:14.733 --> 08:17.513
+<v Ellis Crosby>the dream that everyone has of building a boilerplate.
+
+
+90
+08:19.173 --> 08:21.013
+<v Michael Taylor>I know, I know. Yeah.
+
+
+91
+08:21.093 --> 08:29.869
+<v Michael Taylor>It's probably just me procrastinating, but I do find that not having a boilerplate is really limiting me in terms
+
+
+92
+08:29.901 --> 08:33.193
+<v Michael Taylor>of. It's giving me an excuse not to ship stuff.
+
+
+93
+08:33.773 --> 08:41.305
+<v Ellis Crosby>Yeah. Yeah. I mean, it takes so long to go through all the process. Yeah.
+
+
+94
+08:41.409 --> 08:52.653
+<v Ellis Crosby>So I'll send you the code. There's nothing particularly interesting going on here, I don't think. Yeah, there's a refresh.
+
+
+95
+08:53.393 --> 08:59.073
+<v Ellis Crosby>I'll send you more detail, but, yeah, basically they log in various.
+
+
+96
+09:01.553 --> 09:11.935
+<v Ellis Crosby>Routes for the pages, the actual app, we just try and call out the user function in auth if it
+
+
+97
+09:11.959 --> 09:15.447
+<v Ellis Crosby>exists, and then use that in queries.
+
+
+98
+09:15.495 --> 09:25.903
+<v Ellis Crosby>Like use write id using bucket based queries, like pulling in projects that they have information associated with that.
+
+
+99
+09:25.943 --> 09:29.523
+<v Michael Taylor>Yeah. Do you, is there anything special you have to do?
+
+
+100
+09:29.603 --> 09:37.171
+<v Michael Taylor>So like if I'm, if I'm, if I'm like, say, if you're adding a new project for a client or
+
+
+101
+09:37.187 --> 09:43.715
+<v Michael Taylor>whatever, like say not just the user collection, but like if you make your own collection, do you have to
+
+
+102
+09:43.739 --> 09:46.275
+<v Michael Taylor>create it in pocket space first or.
+
+
+103
+09:46.459 --> 09:51.707
+<v Michael Taylor>That was the other bug I ran into just before this call was like, I tried to send something off,
+
+
+104
+09:51.755 --> 09:54.219
+<v Michael Taylor>like add it. For me, it was like a testimonials app.
+
+
+105
+09:54.251 --> 09:59.391
+<v Michael Taylor>So I add a testimonial, but it ended up like it rejected it.
+
+
+106
+09:59.407 --> 10:01.563
+<v Michael Taylor>So I haven't had a chance to look into it yet.
+
+
+107
+10:02.343 --> 10:09.807
+<v Ellis Crosby>Yeah, so it's, yeah, so I'm not sure if you use superbase too much, but it's a similar kind of
+
+
+108
+10:09.815 --> 10:15.443
+<v Ellis Crosby>setup where you have to add rules to the tables as to who can do what.
+
+
+109
+10:15.943 --> 10:21.043
+<v Ellis Crosby>So if I jump into the interface for that one.
+
+
+110
+10:21.543 --> 10:28.543
+<v Ellis Crosby>So within each collection, if you hit edits, there's these API rules as a default.
+
+
+111
+10:28.583 --> 10:37.199
+<v Ellis Crosby>I think they, I think they just show us like, I think they just show us like locks for everything.
+
+
+112
+10:37.271 --> 10:41.683
+<v Ellis Crosby>So basically no one can do anything at the start.
+
+
+113
+10:42.063 --> 10:48.123
+<v Ellis Crosby>So you have to add in the rules of list, view, creates, et cetera.
+
+
+114
+10:49.143 --> 10:56.259
+<v Michael Taylor>Okay, so if that basically means like if there, if they are that user, they can see, they can list
+
+
+115
+10:56.291 --> 10:57.103
+<v Michael Taylor>or search.
+
+
+116
+10:57.803 --> 10:58.315
+<v Ellis Crosby>Exactly.
+
+
+117
+10:58.339 --> 11:05.955
+<v Ellis Crosby>So this is just like there has to be a user and the user has to use the id, has
+
+
+118
+11:05.979 --> 11:15.543
+<v Ellis Crosby>to match the user's user column. So to be honest, I just packed the info. All of them.
+
+
+119
+11:16.283 --> 11:22.953
+<v Ellis Crosby>Yeah, I guess if it was like a testimonials app, you probably have a different rule for viewing.
+
+
+120
+11:24.613 --> 11:28.349
+<v Ellis Crosby>Yeah, if you leave it empty. Yeah, everyone can view those.
+
+
+121
+11:28.541 --> 11:32.473
+<v Ellis Crosby>That's the part that usually trips me up on super bass.
+
+
+122
+11:32.813 --> 11:40.821
+<v Ellis Crosby>I think they have an error message that is a bit clearer on why you can't add the row, but
+
+
+123
+11:40.837 --> 11:47.693
+<v Ellis Crosby>with pocket base, it'll just sort of reject that. Yeah. The logs themselves are usually a bit more helpful.
+
+
+124
+11:50.433 --> 11:56.257
+<v Ellis Crosby>The API response probably won't say much, but if you go in here, you can sometimes see like, yeah, this
+
+
+125
+11:56.385 --> 11:56.697
+<v Ellis Crosby>one.
+
+
+126
+11:56.745 --> 12:04.642
+<v Michael Taylor>Oh yeah, yeah. This one says the resource wasn't found. Yeah, yeah, that's pretty good.
+
+
+127
+12:04.834 --> 12:07.366
+<v Michael Taylor>No rows and the result set.
+
+
+128
+12:08.466 --> 12:14.486
+<v Ellis Crosby>Yeah. Or like if you don't set up the rules correctly, then only admins can.
+
+
+129
+12:15.826 --> 12:19.282
+<v Michael Taylor>Yeah. Cool. Yeah, I really like the logs actually. It's good.
+
+
+130
+12:19.474 --> 12:22.746
+<v Ellis Crosby>Yeah, the logs are a lot better than super basic
+
+
+131
+12:22.786 --> 12:31.646
+<v Michael Taylor>logs and miles better than Google cloud. Yeah, that's a low bar.
+
+
+132
+12:37.066 --> 12:38.098
+<v Michael Taylor>So when you make that.
+
+
+133
+12:38.162 --> 12:44.266
+<v Michael Taylor>So with that collection, do you just make the API call just like in your app?
+
+
+134
+12:44.306 --> 12:47.954
+<v Michael Taylor>Like you just code it and then it just creates the columns and everything?
+
+
+135
+12:48.010 --> 12:52.566
+<v Michael Taylor>Or do you have to go and create the collection first?
+
+
+136
+12:53.996 --> 13:00.096
+<v Ellis Crosby>So I always just create the collection. I don't know if there's an easier way of handling migrations.
+
+
+137
+13:00.596 --> 13:10.172
+<v Ellis Crosby>I did have a go at making just, if you have admin access, if you're authenticated with an admin account,
+
+
+138
+13:10.244 --> 13:18.468
+<v Ellis Crosby>you can make tables through the API. So I was trying to build a script of just seeing it.
+
+
+139
+13:18.532 --> 13:24.490
+<v Ellis Crosby>I have the models in here anyway, so trying to make a script that just goes through this, checks if
+
+
+140
+13:24.498 --> 13:32.434
+<v Ellis Crosby>the tables exist and then embrace them if not, which never really worked out that well and I couldn't go
+
+
+141
+13:32.450 --> 13:34.498
+<v Ellis Crosby>through all of the error messages to figure it out.
+
+
+142
+13:34.642 --> 13:39.450
+<v Ellis Crosby>Yeah, so far I just, I just go in here and create a table manual.
+
+
+143
+13:39.498 --> 13:45.602
+<v Ellis Crosby>But it would be possible to do that. You can also like import collections from a JSON.
+
+
+144
+13:45.674 --> 13:51.412
+<v Ellis Crosby>So if you wanted to do a fast way, you could probably just grab all of the things in here,
+
+
+145
+13:51.524 --> 13:57.572
+<v Ellis Crosby>get cloud to convert that to a JSON and then import it. Let's get closer.
+
+
+146
+13:57.764 --> 13:59.980
+<v Michael Taylor>Cool. Okay. Yeah. Interesting.
+
+
+147
+14:00.028 --> 14:04.776
+<v Michael Taylor>Oh, I guess this is good for like if you wanted to like switch to a new pocket base.
+
+
+148
+14:05.956 --> 14:13.530
+<v Ellis Crosby>Yeah, yeah, yeah, I do that quite a bit sometimes. That set up in the right railway project.
+
+
+149
+14:13.578 --> 14:21.566
+<v Ellis Crosby>But yeah, it's very easy to copy this. And then database migrations.
+
+
+150
+14:23.066 --> 14:31.166
+<v Ellis Crosby>I just usually query all of the tables and then inside the backup. But yes, it's a pretty easy process.
+
+
+151
+14:31.866 --> 14:32.646
+<v Michael Taylor>Cool.
+
+
+152
+14:32.946 --> 14:37.646
+<v Ellis Crosby>Yeah, that's interesting. What else is there?
+
+
+153
+14:38.826 --> 14:44.406
+<v Ellis Crosby>Is there anything else that you have a question on or anything like that?
+
+
+154
+14:46.266 --> 14:47.858
+<v Michael Taylor>I guess so.
+
+
+155
+14:48.002 --> 14:56.226
+<v Michael Taylor>If I understand your flow correctly, you would are using pocket base locally or are you just setting up railway
+
+
+156
+14:56.266 --> 14:57.086
+<v Michael Taylor>straight away?
+
+
+157
+14:58.986 --> 15:00.226
+<v Ellis Crosby>I set it up on railway straight away.
+
+
+158
+15:03.950 --> 15:14.360
+<v Ellis Crosby>Just to ask. Just because it's so easy to do that. Even like my dev instances is up there. Yeah.
+
+
+159
+15:14.820 --> 15:21.188
+<v Ellis Crosby>Like I've tried the local one but I don't know, I never really found much like need to do it
+
+
+160
+15:21.204 --> 15:30.324
+<v Ellis Crosby>that way. Like I'm always online anyway, so. Yeah, I'm not sure if you've tried unreal way yet, but.
+
+
+161
+15:30.412 --> 15:31.480
+<v Michael Taylor>No, not yet.
+
+
+162
+15:33.820 --> 15:35.560
+<v Ellis Crosby>It really is like a one click
+
+
+163
+15:38.780 --> 15:41.960
+<v Ellis Crosby>sort of thing. Like they have a template.
+
+
+164
+15:51.900 --> 16:01.774
+<v Ellis Crosby>They have a templates. If you search for, it's this one here with like 965 installs.
+
+
+165
+16:01.942 --> 16:13.038
+<v Ellis Crosby>Yeah, just click it, it deploys and once it's deployed you can grab like the pocket base.
+
+
+166
+16:13.054 --> 16:23.552
+<v Ellis Crosby>All you need at the start is the public URL, which I think will happen in a second once it's
+
+
+167
+16:23.576 --> 16:38.420
+<v Ellis Crosby>deployed. Yeah, basically you copy that URL. And then that's just like something you can dump into the environment variables.
+
+
+168
+16:40.200 --> 16:47.610
+<v Ellis Crosby>There will be actually show you something on a different project. It's a different stack, but it is still a.
+
+
+169
+16:48.750 --> 16:52.570
+<v Ellis Crosby>This is one where it's sveltekit front end and a
+
+
+170
+16:55.950 --> 17:00.410
+<v Ellis Crosby>fast API backend. With this one I did,
+
+
+171
+17:05.030 --> 17:06.690
+<v Ellis Crosby>I needed to have a.
+
+
+172
+17:11.810 --> 17:14.530
+<v Ellis Crosby>Actually, sorry. I was going to show you how I was authenticating it.
+
+
+173
+17:14.610 --> 17:20.390
+<v Ellis Crosby>I thought I was doing as an admin. I think I'm not.
+
+
+174
+17:22.650 --> 17:32.490
+<v Ellis Crosby>Okay, actually I think I probably just have this project with no limits on the table, which is a bit
+
+
+175
+17:32.530 --> 17:40.262
+<v Ellis Crosby>dodgy, but yeah. Anyway, so what I should have done is authenticating as an admin. Yeah.
+
+
+176
+17:40.326 --> 17:47.890
+<v Ellis Crosby>Which I did a lot with super base, but it's basically like a separate, separate function that is.
+
+
+177
+17:50.190 --> 17:59.730
+<v Michael Taylor>Yeah, there's. Isn't there a URL you can visit that to create like an admin account?
+
+
+178
+18:00.630 --> 18:01.950
+<v Ellis Crosby>Yeah. So the first time.
+
+
+179
+18:03.466 --> 18:11.116
+<v Ellis Crosby>The first time you deploy it, you need to go into the interface to create your admin account.
+
+
+180
+18:12.216 --> 18:14.224
+<v Ellis Crosby>To get to the interface.
+
+
+181
+18:14.400 --> 18:17.240
+<v Michael Taylor>Yeah, I think it's just that it's an underscore afterwards, isn't it?
+
+
+182
+18:17.248 --> 18:18.736
+<v Ellis Crosby>Yeah, yeah.
+
+
+183
+18:18.896 --> 18:27.792
+<v Ellis Crosby>And like the first time, wait, actually deploys, but first time you run it, you go through this like setup
+
+
+184
+18:27.824 --> 18:28.396
+<v Ellis Crosby>process.
+
+
+185
+18:29.986 --> 18:31.206
+<v Michael Taylor>And then after that,
+
+
+186
+18:36.866 --> 18:41.794
+<v Michael Taylor>how much does it cost on the railway? So you said like it was like an empty setup.
+
+
+187
+18:41.850 --> 18:43.686
+<v Michael Taylor>Because I haven't used railway yet, actually.
+
+
+188
+18:47.026 --> 18:47.634
+<v Ellis Crosby>It's.
+
+
+189
+18:47.730 --> 18:57.016
+<v Ellis Crosby>You pay, you pay only usage, to be honest, for these ones, I have no idea what the actual cost
+
+
+190
+18:57.096 --> 19:02.836
+<v Ellis Crosby>is. The things that cost a lot on railway are like big databases.
+
+
+191
+19:10.216 --> 19:11.636
+<v Michael Taylor>So it's pretty cheap then.
+
+
+192
+19:12.296 --> 19:17.416
+<v Ellis Crosby>Yes, this is one with, this is actually a pretty big database.
+
+
+193
+19:17.456 --> 19:26.748
+<v Ellis Crosby>I think it has 500 log articles with images as well. And that's about $13 a month.
+
+
+194
+19:26.932 --> 19:27.736
+<v Michael Taylor>Yeah.
+
+
+195
+19:28.356 --> 19:36.892
+<v Ellis Crosby>Okay, cool. Yeah, it's mostly just the, like, the app itself doesn't cost that much. It's just the database. So.
+
+
+196
+19:36.964 --> 19:41.256
+<v Ellis Crosby>Yeah. You can also probably plug that into a database somewhere else.
+
+
+197
+19:42.836 --> 19:50.736
+<v Michael Taylor>Yeah. And then you're also launching your fast API app on a railway as well.
+
+
+198
+19:51.156 --> 20:04.216
+<v Ellis Crosby>Yeah, exactly. And again, that's a pretty, pretty easy thing. Like you need to drop a piece of profile.
+
+
+199
+20:10.356 --> 20:17.661
+<v Ellis Crosby>It's like. Yeah, just like one file you put in just so it deploys. But yeah, it's a pretty easy.
+
+
+200
+20:17.773 --> 20:20.705
+<v Michael Taylor>Oh, literally just that. So that just tells it what to run.
+
+
+201
+20:21.725 --> 20:23.305
+<v Ellis Crosby>Yeah, yeah, exactly.
+
+
+202
+20:25.805 --> 20:32.989
+<v Ellis Crosby>Like for fast API, you need to have like this port and variable, but apart from that, it's just a
+
+
+203
+20:32.997 --> 20:37.585
+<v Ellis Crosby>case of like this if you want to have more workers.
+
+
+204
+20:39.786 --> 20:45.326
+<v Michael Taylor>And then railway just charged you based on the number of workers or like the usage.
+
+
+205
+20:46.026 --> 20:50.566
+<v Ellis Crosby>Yeah, exactly. Which again is usually fair too.
+
+
+206
+20:54.106 --> 21:01.426
+<v Ellis Crosby>Cool. I think the one you sent I found also looked like a similar kind of thing to railway.
+
+
+207
+21:03.146 --> 21:05.276
+<v Michael Taylor>Yeah, well, fly IO.
+
+
+208
+21:05.856 --> 21:08.800
+<v Ellis Crosby>Yeah, yeah. I imagine it's a similar process on there.
+
+
+209
+21:08.928 --> 21:12.088
+<v Michael Taylor>Yeah. The reason I used fly, which is quite nice. Yeah.
+
+
+210
+21:12.112 --> 21:14.840
+<v Michael Taylor>And they similar, like they do a prop file and stuff.
+
+
+211
+21:14.968 --> 21:20.984
+<v Michael Taylor>The reason I use that is it's actually like a VPS, like it's actually giving you a server, if that
+
+
+212
+21:21.000 --> 21:21.756
+<v Michael Taylor>makes sense.
+
+
+213
+21:23.576 --> 21:33.224
+<v Michael Taylor>So like previously I was using SQLite locally and like I had a bunch of like SQL alchemy stuff written
+
+
+214
+21:33.280 --> 21:34.936
+<v Michael Taylor>to do migrations and all that.
+
+
+215
+21:35.056 --> 21:41.408
+<v Michael Taylor>And that's also like a pretty nice stack because you've got your own database there and you're not dependent on
+
+
+216
+21:41.472 --> 21:42.176
+<v Michael Taylor>other things.
+
+
+217
+21:42.296 --> 21:50.176
+<v Michael Taylor>But I wanted to explore pocket base just because it's more like that super based type experience but actually even
+
+
+218
+21:50.216 --> 21:53.996
+<v Michael Taylor>simpler it looks like. So I think this is way easier.
+
+
+219
+21:55.056 --> 22:01.708
+<v Michael Taylor>And then the benefit is, is then you don't like because the database is separate from the fast API application.
+
+
+220
+22:01.772 --> 22:11.204
+<v Michael Taylor>Now you can deploy a fast API separately like this because previously I hadn't tried railway yet and I was
+
+
+221
+22:11.220 --> 22:17.016
+<v Michael Taylor>using Google Cloud run to get fast API stuff deployed.
+
+
+222
+22:17.716 --> 22:23.766
+<v Michael Taylor>When I worked with James on these things, his stack is he has next JS or typescript as a front
+
+
+223
+22:23.806 --> 22:30.426
+<v Michael Taylor>end. Then you have fast API as the back end and have docker to run both.
+
+
+224
+22:32.086 --> 22:37.382
+<v Michael Taylor>It's just that ends up and we have the front end deployed on Vercel and the back end deployed on
+
+
+225
+22:37.414 --> 22:45.586
+<v Michael Taylor>Google Cloud run and then we have Google Cloud storage and Google postgres and it just becomes an absolute nightmare
+
+
+226
+22:46.046 --> 22:49.226
+<v Michael Taylor>in terms of DevOps dig through all that.
+
+
+227
+22:50.406 --> 22:54.230
+<v Michael Taylor>He's recently moved to Superbase and that's been really good because that's cleaned up.
+
+
+228
+22:54.278 --> 22:57.006
+<v Michael Taylor>At least we don't have to use Google now for postgres.
+
+
+229
+22:57.626 --> 23:02.886
+<v Michael Taylor>But yeah, even Superbase is still quite, quite complicated I think because you have to do migrations and all that.
+
+
+230
+23:05.506 --> 23:09.442
+<v Ellis Crosby>Yeah, yeah, I mean, yeah, I do like superbass.
+
+
+231
+23:09.474 --> 23:19.566
+<v Ellis Crosby>It's just like with the, like with the one like sort of have them deploying on their platform.
+
+
+232
+23:20.586 --> 23:24.146
+<v Ellis Crosby>Your limits is like two free project any one time.
+
+
+233
+23:25.126 --> 23:31.926
+<v Ellis Crosby>And yeah, like the way that I churn projects and pick up new ideas, it just is way more than
+
+
+234
+23:31.966 --> 23:38.106
+<v Ellis Crosby>two on any one line. Yeah, it's a pain in the ass to start to apply as well.
+
+
+235
+23:39.006 --> 23:42.902
+<v Ellis Crosby>Mostly just because they have their, where they like have their store.
+
+
+236
+23:42.934 --> 23:50.744
+<v Ellis Crosby>Like their superb storage is, requires like two separate services and connect them and it's a bit of a pain
+
+
+237
+23:50.760 --> 23:54.356
+<v Ellis Crosby>in the ass. Whereas pocket base, you can do it with one.
+
+
+238
+23:56.616 --> 24:02.136
+<v Michael Taylor>Yeah, he does have a pretty interesting setup where he has super base running locally.
+
+
+239
+24:03.186 --> 24:06.264
+<v Michael Taylor>Um, like, you know, like the open source version of it.
+
+
+240
+24:06.360 --> 24:13.048
+<v Michael Taylor>And uh, you can actually go like similar to go in and like use supabase in your browser, um, which
+
+
+241
+24:13.072 --> 24:13.728
+<v Michael Taylor>is quite cool.
+
+
+242
+24:13.792 --> 24:18.792
+<v Michael Taylor>And then um, he has like a script where you can generate all the types from um, you know, from
+
+
+243
+24:18.824 --> 24:23.916
+<v Michael Taylor>the, from, from superbase directly so it matches the database perfectly.
+
+
+244
+24:24.696 --> 24:31.528
+<v Michael Taylor>But, but like both for the next Js typescript app and also for the fast API backend.
+
+
+245
+24:31.712 --> 24:34.288
+<v Michael Taylor>So that's quite a nice flow.
+
+
+246
+24:34.392 --> 24:44.232
+<v Michael Taylor>I think his stack is probably good to use if you're putting a serious application production for f 500 client.
+
+
+247
+24:44.384 --> 24:49.696
+<v Michael Taylor>But mostly what I really want to do is dumb everything down so that I don't have to think about
+
+
+248
+24:49.736 --> 24:50.592
+<v Michael Taylor>setup at all.
+
+
+249
+24:50.704 --> 24:54.288
+<v Michael Taylor>And I'm just like, I've got a Jupyter notebook and then I'm just going to dump it and then now
+
+
+250
+24:54.312 --> 24:59.534
+<v Michael Taylor>it's got a database and pocket base and then I, and then I'm just going to deploy it and see
+
+
+251
+24:59.550 --> 25:00.986
+<v Michael Taylor>if anyone gives a shit.
+
+
+252
+25:02.526 --> 25:08.718
+<v Ellis Crosby>Yeah, and like this, like this stack is just so easy to do that kind of thing because everything is
+
+
+253
+25:08.742 --> 25:11.198
+<v Ellis Crosby>in one code base.
+
+
+254
+25:11.222 --> 25:18.110
+<v Ellis Crosby>So you can just drop in a notebook and say like, yeah, do this, make this interface and you can
+
+
+255
+25:18.118 --> 25:23.374
+<v Ellis Crosby>do everything at the same time as opposed to two separate code bases.
+
+
+256
+25:23.550 --> 25:32.068
+<v Ellis Crosby>Do the backend first, deploy that, do the front end. Get it all matching up, which is just a pneumonia.
+
+
+257
+25:32.092 --> 25:35.516
+<v Michael Taylor>Yeah, exactly. It just ends up being quite a big process.
+
+
+258
+25:35.636 --> 25:44.348
+<v Michael Taylor>And I think also it depends on whether you're building in a team of devs or if you're just doing
+
+
+259
+25:44.372 --> 25:45.844
+<v Michael Taylor>a solo developing project.
+
+
+260
+25:45.940 --> 25:51.412
+<v Michael Taylor>Because if you're just solo developer, you don't really need to work branches and you don't really need to worry
+
+
+261
+25:51.444 --> 25:59.564
+<v Michael Taylor>about um, you know, deployment and processes and like you can just yellow everything into main and, and just get
+
+
+262
+25:59.580 --> 26:00.616
+<v Michael Taylor>it, get it live.
+
+
+263
+26:01.636 --> 26:05.804
+<v Ellis Crosby>Yeah, absolutely. Deploy everything to play some main every five minutes.
+
+
+264
+26:05.940 --> 26:13.056
+<v Michael Taylor>Yeah. The peter levels approach. Don't know if you listen to his latest podcast on them.
+
+
+265
+26:13.356 --> 26:17.412
+<v Michael Taylor>He was on Lex Freeman's podcast.
+
+
+266
+26:17.564 --> 26:18.332
+<v Ellis Crosby>Do you see that one?
+
+
+267
+26:18.364 --> 26:23.536
+<v Ellis Crosby>Yeah, I haven't, I've seen highlights, but I haven't committed to the entire thing just yet.
+
+
+268
+26:23.696 --> 26:26.088
+<v Michael Taylor>Oh man, it's so, so good. It's so funny.
+
+
+269
+26:26.112 --> 26:33.672
+<v Michael Taylor>But, but like he specifically, one of the things he said is that he has like a keyboard hotkey to
+
+
+270
+26:33.784 --> 26:43.236
+<v Michael Taylor>just commit. But then every commit goes to main and every, and whenever main gets a commit, it just deploys.
+
+
+271
+26:43.616 --> 26:52.328
+<v Michael Taylor>So what he's doing is like every few seconds he's like control saving and then pressing command dot or whatever.
+
+
+272
+26:52.512 --> 26:54.280
+<v Michael Taylor>And then it's just applying to local.
+
+
+273
+26:54.328 --> 26:59.648
+<v Michael Taylor>And they were like, how do you not end up with breaking your production environment?
+
+
+274
+26:59.712 --> 27:01.256
+<v Michael Taylor>He was like, oh, just code really carefully.
+
+
+275
+27:03.883 --> 27:10.753
+<v Ellis Crosby>That's so funny. Yeah, well, that plus he doesn't really, like, leave the house.
+
+
+276
+27:10.913 --> 27:13.529
+<v Ellis Crosby>If something breaks, he can fix it within, like, ten minutes.
+
+
+277
+27:13.681 --> 27:21.585
+<v Michael Taylor>That's true. Yeah. Yeah. Cool. Okay, so, yeah, this is really useful. Yeah.
+
+
+278
+27:21.609 --> 27:27.973
+<v Michael Taylor>If you don't mind sending the auth pie. That'd be, like, anything you can send me.
+
+
+279
+27:28.273 --> 27:29.453
+<v Ellis Crosby>Be really useful.
+
+
+280
+27:29.793 --> 27:36.651
+<v Michael Taylor>Just compare it against what Claude wrote for me and seed, because, yeah, I'm spending today just debugging, kind of
+
+
+281
+27:36.667 --> 27:38.163
+<v Michael Taylor>getting this boilerplate thing ready.
+
+
+282
+27:38.243 --> 27:42.315
+<v Michael Taylor>I'm happy to share the boilerplate with you as well when I'm done, if you want to use it for
+
+
+283
+27:42.339 --> 27:45.251
+<v Michael Taylor>stuff. Yeah, sure.
+
+
+284
+27:45.427 --> 27:50.171
+<v Michael Taylor>I mean, if you want to team up on this as, like, a project and get, like, you know, stick
+
+
+285
+27:50.187 --> 27:54.475
+<v Michael Taylor>it on Gumroad and split the revenue or something, I'm happy to do that as well, but it just depends
+
+
+286
+27:54.499 --> 27:58.699
+<v Michael Taylor>on what you want to do. I think we'd need to, like, just go through and test.
+
+
+287
+27:58.731 --> 28:02.743
+<v Michael Taylor>It all works and stuff on stripe and everything. That would be a bit of a slogan.
+
+
+288
+28:03.593 --> 28:04.693
+<v Ellis Crosby>Yeah, that.
+
+
+289
+28:05.513 --> 28:10.521
+<v Ellis Crosby>That's the main thing that, like, that's not the block that I've had for putting this out as a bullet
+
+
+290
+28:10.617 --> 28:17.333
+<v Ellis Crosby>so far. Just a camouflage with stripe. Yes. Everything else is relatively easy, but stripe is.
+
+
+291
+28:18.313 --> 28:23.093
+<v Ellis Crosby>I mean, actually, it's bonus. Even then, I can probably copy a lot of this stuff in from scallop hander.
+
+
+292
+28:25.473 --> 28:28.893
+<v Ellis Crosby>Yeah. Anyway. Yeah, I'll send this over to.
+
+
+293
+28:35.483 --> 28:40.147
+<v Michael Taylor>Cool. Yeah, I think that. I think that was pretty much everything. Yeah.
+
+
+294
+28:40.235 --> 28:46.219
+<v Michael Taylor>I'll keep you in the loop on what I figure out as well with it, but, yeah, like, goal is
+
+
+295
+28:46.251 --> 28:53.543
+<v Michael Taylor>kind of getting started this week, later today, hopefully, because I'm off to Athens for a growth mentor meetup tomorrow,
+
+
+296
+28:55.783 --> 29:01.095
+<v Michael Taylor>and then I'm gonna go. Yeah, next week. I'm just.
+
+
+297
+29:01.199 --> 29:06.415
+<v Michael Taylor>I've got about a list of, like, ten different ideas I want to pump out, so I'm just gonna start
+
+
+298
+29:06.599 --> 29:11.843
+<v Michael Taylor>slamming them. Nice. Yeah. One start of a week.
+
+
+299
+29:13.303 --> 29:15.683
+<v Ellis Crosby>Yeah, I mean, that's the dream, really.
+
+
+300
+29:16.103 --> 29:22.821
+<v Michael Taylor>Yeah, well, like. Well, yeah, I. Yeah, like, I think I've.
+
+
+301
+29:22.957 --> 29:28.213
+<v Michael Taylor>Yeah, I'm trying to figure out, like, how long to work on different things before I give up on them,
+
+
+302
+29:28.253 --> 29:34.653
+<v Michael Taylor>but. But, like, what. What I'm realizing is, with quite a lot of them, I'm doing, like, ten customer calls.
+
+
+303
+29:34.693 --> 29:39.965
+<v Michael Taylor>Whatever, once I built the prototype, and then. And then it's like, you know, there's no demand, really.
+
+
+304
+29:40.069 --> 29:42.793
+<v Michael Taylor>So I feel like what I.
+
+
+305
+29:43.133 --> 29:49.111
+<v Michael Taylor>It's taken me, like, say, two, three weeks to build the prototype, or maybe even a month, like, depending on
+
+
+306
+29:49.127 --> 29:51.495
+<v Michael Taylor>what else what consulting I've got going on.
+
+
+307
+29:51.679 --> 29:56.255
+<v Michael Taylor>So if I can get that down to a week, then I can cycle through four times faster, is my
+
+
+308
+29:56.279 --> 29:57.003
+<v Michael Taylor>thinking.
+
+
+309
+29:57.663 --> 30:03.583
+<v Ellis Crosby>Yeah, I guess if it's down to a week, then it's also easy to just respond to.
+
+
+310
+30:03.786 --> 30:10.648
+<v Ellis Crosby>Demand right now, a lot of the things I work on, it just comes from, like, calls my wife has
+
+
+311
+30:10.672 --> 30:14.096
+<v Ellis Crosby>with her clients. And they're like, oh, yeah, you guys do AI, can you do this?
+
+
+312
+30:14.176 --> 30:17.184
+<v Ellis Crosby>And then she's like, yeah, we can do that.
+
+
+313
+30:17.200 --> 30:23.248
+<v Ellis Crosby>And she passed on to me, but sometimes it just takes, like, a month to get, like, an MVP to
+
+
+314
+30:23.272 --> 30:27.888
+<v Ellis Crosby>show them, and then by the time that's in their hands, like, the momentum is gone.
+
+
+315
+30:27.952 --> 30:36.358
+<v Ellis Crosby>So, yeah, I guess, like, if it goes down to one week turnaround times, then the ability to, like, just
+
+
+316
+30:36.422 --> 30:39.350
+<v Ellis Crosby>respond to minor questions.
+
+
+317
+30:39.518 --> 30:49.666
+<v Michael Taylor>Yeah, yeah. And even just, like, side projects and stuff, you know, none of these things work out. Yeah.
+
+
+318
+30:53.406 --> 30:57.240
+<v Ellis Crosby>Awesome. Yeah, I'll send that over to you. Let me know how it goes.
+
+
+319
+30:57.328 --> 31:01.304
+<v Ellis Crosby>It's also co written by mostly Claude.
+
+
+320
+31:01.480 --> 31:10.384
+<v Michael Taylor>Yeah, I do think that's a good idea, by the way, to get Claude to write the documentation and do
+
+
+321
+31:10.400 --> 31:12.716
+<v Michael Taylor>a pr. That's. Yeah, I think that would help.
+
+
+322
+31:13.216 --> 31:18.796
+<v Ellis Crosby>Yeah, yeah, I think it's really hurting. Like, the amount of people using pocket base.
+
+
+323
+31:19.456 --> 31:24.020
+<v Ellis Crosby>Like, the guy's like, yeah, just go into this website and pythonize everything yourself.
+
+
+324
+31:24.188 --> 31:29.364
+<v Ellis Crosby>Like, it would be so easy to just go through. And, like, he did literally take all of the functions.
+
+
+325
+31:29.420 --> 31:38.176
+<v Ellis Crosby>It's just. Yeah, instead of camera case, it's like, what we call it, snake case. Yeah, imagine Claude.
+
+
+326
+31:40.716 --> 31:47.016
+<v Michael Taylor>Yeah. And, like, the nice thing, actually, is that Claude seems to. Does seem to understand pocket bass fairly well.
+
+
+327
+31:48.446 --> 31:50.426
+<v Ellis Crosby>Yeah, yeah,
+
+
+328
+31:53.686 --> 31:59.066
+<v Ellis Crosby>I think just the fact that, like, their APIs, it's not doing anything too crazy. Everything is.
+
+
+329
+31:59.566 --> 32:03.426
+<v Ellis Crosby>All the functions are well labeled. It's probably quite easy for it to.
+
+
+330
+32:05.886 --> 32:10.142
+<v Michael Taylor>Yeah. Cool. All right, thanks, mate. I really appreciate this.
+
+
+331
+32:10.214 --> 32:14.426
+<v Michael Taylor>And, yeah, also send me invoice for the time as well when you get a chance to.
+
+
+332
+32:14.875 --> 32:17.815
+<v Michael Taylor>It says, actually, I'll send you the.
+
+
+333
+32:18.515 --> 32:23.695
+<v Michael Taylor>I'll send you in slack, the company name and stuff if you don't have it.
+
+
+334
+32:26.715 --> 32:31.655
+<v Michael Taylor>Is slack the best place? Or actually, I could do Twitter if that's easier.
+
+
+335
+32:32.195 --> 32:36.735
+<v Ellis Crosby>Yes. Cool.
+
+
+336
+32:37.395 --> 32:39.175
+<v Michael Taylor>All right, cheers, mate.
+
+
+337
+32:39.555 --> 32:40.714
+<v Ellis Crosby>I see you later.
+
+
+338
+32:40.850 --> 32:41.362
+<v Michael Taylor>Take care.
+
+
+339
+32:41.394 --> 32:41.546
+<v Ellis Crosby>Bye.

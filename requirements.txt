@@ -1,0 +1,8 @@
+langchain
+langchain-openai
+jupyter
+openai
+chromadb
+nest_asyncio
+tavily-python
+fal-client
