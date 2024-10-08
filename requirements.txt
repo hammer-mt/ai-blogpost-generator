@@ -1,8 +1,12 @@
 langchain
 langchain-openai
+langchain-community 
+langchain-core
 jupyter
 openai
 chromadb
 nest_asyncio
 tavily-python
 fal-client
+python-dotenv
+faiss-cpu
