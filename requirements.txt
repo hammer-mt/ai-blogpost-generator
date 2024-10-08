@@ -10,3 +10,4 @@ tavily-python
 fal-client
 python-dotenv
 faiss-cpu
+gradio
